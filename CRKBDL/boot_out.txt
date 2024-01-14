@@ -1,0 +1,7 @@
+Adafruit CircuitPython 8.0.5-1-g8e947f456a-dirty on 2023-09-20; BLOK with rp2040
+Board ID:boardsource_blok
+UID:E461304257492521
+boot.py output:
+Traceback (most recent call last):
+  File "boot.py", line 4, in <module>
+OSError: [Errno 30] Read-only filesystem

@@ -1,27 +1,14 @@
-import kmk.handlers.stock as handlers
-from kmk.key_validators import mod_tap_validator
 from kmk.keys import make_argumented_key
-from kmk.modules.holdtap import HoldTap
+from kmk.modules.holdtap import HoldTap, HoldTapKeyMeta
 
 
+# Deprecation Notice: The `ModTap` class serves as an alias for `HoldTap` and will be removed in a future update. Please use `HoldTap` instead.
 class ModTap(HoldTap):
     def __init__(self):
         super().__init__()
         make_argumented_key(
-            validator=mod_tap_validator,
+            validator=HoldTapKeyMeta,
             names=('MT',),
             on_press=self.ht_pressed,
             on_release=self.ht_released,
         )
-
-    def ht_activate_hold(self, key, keyboard, *args, **kwargs):
-        handlers.default_pressed(key.meta.hold, keyboard, None)
-
-    def ht_deactivate_hold(self, key, keyboard, *args, **kwargs):
-        handlers.default_released(key.meta.hold, keyboard, None)
-
-    def ht_activate_tap(self, key, keyboard, *args, **kwargs):
-        handlers.default_pressed(key.meta.tap, keyboard, None)
-
-    def ht_deactivate_tap(self, key, keyboard, *args, **kwargs):
-        handlers.default_released(key.meta.tap, keyboard, None)

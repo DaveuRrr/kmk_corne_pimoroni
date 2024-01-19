@@ -63,7 +63,6 @@ class Oled(Extension):
 
     def renderOledTextLayer(self, layer):
         splash = displayio.Group()
-        self._display.show(splash)
         splash.append(
             label.Label(
                 terminalio.FONT,
@@ -100,16 +99,17 @@ class Oled(Extension):
                 y=25,
             )
         )
+        self._display.show(splash)
         gc.collect()
 
     def renderOledImgLayer(self, layer):
         splash = displayio.Group()
-        self._display.show(splash)
         odb = displayio.OnDiskBitmap(
             '/' + self.returnCurrectRenderText(layer, self._views[0])
         )
         image = displayio.TileGrid(odb, pixel_shader=odb.pixel_shader)
         splash.append(image)
+        self._display.show(splash)
         gc.collect()
 
     def updateOLED(self, sandbox):
@@ -125,9 +125,9 @@ class Oled(Extension):
     def on_runtime_disable(self, sandbox):
         return
 
-    def during_bootup(self, board):
+    def during_bootup(self, keyboard):
         displayio.release_displays()
-        if self._i2c == None: self._i2c = busio.I2C(board.SCL, board.SDA)
+        if self._i2c == None: self._i2c = busio.I2C(keyboard.SCL, keyboard.SDA)
         self._display = adafruit_displayio_ssd1306.SSD1306(
             displayio.I2CDisplay(self._i2c, device_address=0x3C),
             width=self._width,

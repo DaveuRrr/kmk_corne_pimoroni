@@ -41,7 +41,8 @@ keyboard.modules.append(combos)
 keyboard.modules.append(mousekeys)
 
 combos.combos = [
-    Chord((22, 46), KC.TG(3), match_coord=True)
+    Chord((22, 46), KC.TG(3), match_coord=True),
+    Chord((KC.TAB, KC.Q), KC.ESC)
 ]
 
 i2c = io.I2C(scl=board.SCL, sda=board.SDA)
@@ -70,6 +71,7 @@ XXXXXXXX = KC.NO
 TB_Handl = KC.TB_NEXT_HANDLER
 MB_LMB   = KC.MB_LMB
 MB_RMB   = KC.MB_RMB
+HT_GUI   =  KC.HT(KC.ENTER, KC.LGUI)
 
 # keymap
 keyboard.keymap = [ 
@@ -129,9 +131,9 @@ keyboard.keymap = [
     ], 
     # 3 Gaming
     # ,-----------------------------------------.                    ,-----------------------------------------.
-    # | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | BKSP |
+    # | Esc  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | BKSP |
     # |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-    # | LALT |   A  |   S  |   D  |   F  |   G  |                    |   H  |   J  |   K  |   L  |  ;:  |  '"  |
+    # | Tab  |   A  |   S  |   D  |   F  |   G  |                    |   H  |   J  |   K  |   L  |  ;:  |  '"  |
     # |------+------+------+------+------+------|                    |------+------+------+------+------+------|
     # | Shft |   Z  |   X  |   C  |   V  |   B  |-------.    ,-------|   N  |   M  |  ,<  |  .>  |  /?  |  ENT |
     # `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -142,8 +144,8 @@ keyboard.keymap = [
     [
         KC.ESC,   KC.Q,     KC.W,     KC.E,     KC.R,     KC.T,                         KC.Y,     KC.U,     KC.I,     KC.O,     KC.P,     KC.BSPC,  \
         KC.TAB,   KC.A,     KC.S,     KC.D,     KC.F,     KC.G,                         KC.H,     KC.J,     KC.K,     KC.L,     KC.SCLN,  KC.QUOTE, \
-        KC.LSFT,  KC.Z,     KC.X,     KC.C,     KC.V,     KC.B,                         KC.N,     KC.M,     KC.COMMA, KC.DOT,   KC.SLASH, KC.ENTER, \
-                                                KC.LCTL,  KC.LALT,  KC.SPACE, KC.SPACE, ________, KC.LGUI,
+        KC.LSFT,  KC.Z,     KC.X,     KC.C,     KC.V,     KC.B,                         KC.N,     KC.M,     KC.COMMA, KC.DOT,   KC.SLASH, HT_GUI, \
+                                                KC.LCTL,  KC.LALT,  KC.SPACE, KC.SPACE, ________, XXXXXXXX,
     ], 
     # 4 Dummy
     [
